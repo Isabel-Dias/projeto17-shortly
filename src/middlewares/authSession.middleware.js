@@ -5,7 +5,7 @@ async function AuthSession(req, res, next) {
     const bearerToken = req.headers.authorization;
     let token = bearerToken?.replace('Bearer ', '');
 
-    console.log(token, 1);
+    
     if (!token) {
         return res.status(401).send({ message: "Não autorizado, token não recebido" });
     }
@@ -16,17 +16,14 @@ async function AuthSession(req, res, next) {
             `SELECT * 
             FROM sessions`
         )
-            console.log(session.rows, 2);
+            
         let resultSession = session.rows.map((entry) => {
             if (token == `"${entry.token}"`) {
                 return entry;
             }
         })
-        console.log(resultSession, 3);
 
         resultSession = resultSession[0];
-
-        console.log(resultSession, 4);
 
         if (!resultSession) {
             return res.status(401).send({ message: "Não autorizado, sessão não cadastrada" });
