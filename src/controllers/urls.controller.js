@@ -6,9 +6,6 @@ export async function postUrl (req, res) {
     const { id } = res.locals.user
     const { url } = req.body
     const shortUrl = nanoid(8)
-    console.log(id);
-    console.log(url);
-    console.log(shortUrl);
 
     const validationSchema = urlSchema.validate(req.body);
 
@@ -32,8 +29,7 @@ export async function postUrl (req, res) {
         
         return res.status(201).send(urlRes)
     } catch (error) {
-        console.log(error);
-        return res.sendStatus(500)
+        return res.status(500).send(error)
     }
 }
 
@@ -42,24 +38,24 @@ export async function getOneUrl(req, res) {
         const { id } = req.params;
         
         const urlById = await db.query(`
-        SELECT * 
-        FROM urls
-        WHERE id = $1`, [id]
+        SELECT * FROM urls
+        WHERE 
+        id = $1;`, [id]
         )
 
-        if(urlById.rows.length == 0) {
-            return res.sendStatus(404)
+        if(urlById.rowCount == 0) {
+            return res.status(404).send({message: "URL não existe!"})
         }
         
         const urlData = {
             id: id,
-	        shortUrl: urlById.rows[0].shortUrl,
-	        url_link: urlById.rows[0].url_link
+	        shortUrl: urlById.rows[0].short_url,
+	        url: urlById.rows[0].url
         }
 
         return res.status(200).send(urlData)
     } catch (error) {
-        return res.sendStatus(500)
+        return res.status(500).send(error)
     }
 }
 
