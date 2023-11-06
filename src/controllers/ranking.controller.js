@@ -21,7 +21,6 @@ export default async function getRankings (req, res) {
 
         return res.status(200).send(ranking.rows)
     } catch (error) {
-        console.log(error);
         return res.status(500).send(error)
     }
 }
