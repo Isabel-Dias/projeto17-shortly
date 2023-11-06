@@ -5,7 +5,7 @@
 -- Dumped from database version 15.4
 -- Dumped by pg_dump version 16.0 (Ubuntu 16.0-1.pgdg22.04+1)
 
--- Started on 2023-11-06 01:24:27 -03
+-- Started on 2023-11-06 02:25:25 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -31,7 +31,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 217 (class 1259 OID 16518)
+-- TOC entry 217 (class 1259 OID 16561)
 -- Name: sessions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -39,12 +39,12 @@ CREATE TABLE public.sessions (
     id integer NOT NULL,
     token text NOT NULL,
     user_id integer NOT NULL,
-    "“createdat”" timestamp without time zone DEFAULT now() NOT NULL
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
 --
--- TOC entry 216 (class 1259 OID 16517)
+-- TOC entry 216 (class 1259 OID 16560)
 -- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -67,7 +67,7 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
--- TOC entry 219 (class 1259 OID 16533)
+-- TOC entry 219 (class 1259 OID 16576)
 -- Name: urls; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -77,12 +77,12 @@ CREATE TABLE public.urls (
     url text NOT NULL,
     short_url character varying(8) NOT NULL,
     views integer DEFAULT 0 NOT NULL,
-    "“createdat”" timestamp without time zone DEFAULT now() NOT NULL
+    "createdAt" timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
 --
--- TOC entry 218 (class 1259 OID 16532)
+-- TOC entry 218 (class 1259 OID 16575)
 -- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -105,7 +105,7 @@ ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 
 
 --
--- TOC entry 215 (class 1259 OID 16505)
+-- TOC entry 215 (class 1259 OID 16549)
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -119,7 +119,7 @@ CREATE TABLE public.users (
 
 
 --
--- TOC entry 214 (class 1259 OID 16504)
+-- TOC entry 214 (class 1259 OID 16548)
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -142,7 +142,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- TOC entry 3004 (class 2604 OID 16521)
+-- TOC entry 3004 (class 2604 OID 16564)
 -- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -150,7 +150,7 @@ ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.ses
 
 
 --
--- TOC entry 3006 (class 2604 OID 16536)
+-- TOC entry 3006 (class 2604 OID 16579)
 -- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -158,7 +158,7 @@ ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id
 
 
 --
--- TOC entry 3002 (class 2604 OID 16508)
+-- TOC entry 3002 (class 2604 OID 16552)
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -166,7 +166,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- TOC entry 3014 (class 2606 OID 16526)
+-- TOC entry 3014 (class 2606 OID 16569)
 -- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -175,7 +175,7 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 3016 (class 2606 OID 16542)
+-- TOC entry 3016 (class 2606 OID 16585)
 -- Name: urls urls_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -184,7 +184,7 @@ ALTER TABLE ONLY public.urls
 
 
 --
--- TOC entry 3010 (class 2606 OID 16515)
+-- TOC entry 3010 (class 2606 OID 16559)
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -193,7 +193,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3012 (class 2606 OID 16513)
+-- TOC entry 3012 (class 2606 OID 16557)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -202,7 +202,7 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 3017 (class 2606 OID 16527)
+-- TOC entry 3017 (class 2606 OID 16570)
 -- Name: sessions sessions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -211,7 +211,7 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 3018 (class 2606 OID 16543)
+-- TOC entry 3018 (class 2606 OID 16586)
 -- Name: urls urls_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -219,7 +219,7 @@ ALTER TABLE ONLY public.urls
     ADD CONSTRAINT urls_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
--- Completed on 2023-11-06 01:24:44 -03
+-- Completed on 2023-11-06 02:25:41 -03
 
 --
 -- PostgreSQL database dump complete
