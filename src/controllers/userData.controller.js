@@ -1,16 +1,10 @@
-import db from "../database/database.connection.js"
+import { userDataService } from "../services/userData.service.js";
 
 export default async function userData (req, res) {
     try {
         const { id } = res.locals.user
-        
-        userData = await db.query(
-            `SELECT users.name, urls.*
-            FROM users
-            JOIN urls 
-            ON users.id = urls.user_id
-            WHERE users.id = $1;`, [id]
-        )
+
+        const userData = userDataService.getOneById(id);
 
         const { name } = userData.rows[0];
 
@@ -25,12 +19,7 @@ export default async function userData (req, res) {
             )
         })
 
-        const viewsSum = await db.query(
-            `SELECT SUM(views) AS "sum"
-            FROM urls
-
-            WHERE user_id = $1;`, [id]
-        )
+        const viewsSum = await userDataService.getViewsSum(id);
 
         const { sum } = viewsSum.rows[0]
 
